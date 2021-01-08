@@ -1,0 +1,96 @@
+/* Chapter 8 - Case 3
+	Author: Erick
+	Date:1/7/2021
+
+Sprite animation is created using the paa_bat.png, paa_bfly.png and paa_fox.png image files 	
+
+Bat has 40 frames
+Butterfly has 34 frames
+Fox has 28 frames
+*/
+
+/*Transition Effects */
+nav#gameLinks a {
+	position: relative;
+	color: white;
+	transition: color 0.5s
+}
+
+nav#gameLinks a:hover {
+	color: rgb(255,294,99);
+}
+
+nav#gameLinks a::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 0px;
+	width: 0%;
+	height: 8px;
+	background-image: linear-gradient(to right, rgb(237,243,71), rgb(188,74,0));
+	border-radius: 4px;
+	opacity: 0;
+
+	transition: opacity 0.5s, width 0.5s;
+}
+nav#gameLinks a:hover::after {
+	opacity: 1;
+	width: 100%;
+}
+
+/*Sprite Styles */
+div.sprite {
+	position: absolute;	
+}
+
+div#bat {
+	width: 40px;
+	height: 50px;
+	top:100px;
+	left: -50px;
+	background: url("paa_bat.png") left center/cover no-repeat;
+}
+
+div#butterfly {
+	width: 35px;
+	height: 35px;
+	top: 60px;
+	left: -50px;
+	background: url("paa_bfly.png") left center/cover no-repeat;
+}
+
+div#fox {
+	width: 280px;
+	height: 260px;
+	bottom: 10px;
+	right: 10px;
+	background: url("paa_fox.png") left center/cover no-repeat;
+}
+
+	/* Animation Styles */
+	@keyframes playSprite {
+		 100% {background-position: right center;}
+	}
+
+	@keyframes flyRight {
+		 25% {top: 150px;}
+		 50% {top: 55px;}
+		 65% {top: 120px;}
+		 90% {top: 50px;}
+		 100% {top: 80px; left: 100%;}
+	}
+
+	div#fox {
+		animation: playSprite 3.5s infinite steps(27);
+		animation-delay: 4s;
+	}
+
+	div#bat {
+		animation: playSprite 2s infinite steps(39), flyRight 8s infinite linear;
+	}
+
+	div#butterfly {
+		animation: playSprite 1s infinite steps(33), flyRight 6s infinite cubic-bezier(0,1,0.73,0);
+		animation-delay: 3s; 
+	}
+
